@@ -40,10 +40,11 @@ Function TrimStart(strString)
             end if
         elseif ch="　" then
         else
-            exit for
+            TrimStart = Mid(strString, i)
+            exit Function
         end if
     next
-    TrimStart = strString
+    TrimStart = ""
 End Function
 
 ' 入口点
@@ -57,7 +58,7 @@ Sub Main(args)
     with regex
         ' TODO: 升级到.NET版本后在表达式前添加这个再进行匹配：
         ' (?<=[^\d])
-        .Pattern = ".{0}(?=(\d+[\.、，,]|[①②③④⑤⑥⑦⑧⑨⑩]))"
+        .Pattern = ".{0}(?=([零一二三四五六七八九十\d]+[\.、，,]|[①②③④⑤⑥⑦⑧⑨⑩]|([\(（]\d+[\)）])))"
         .Global = true
     end with
     for each fn in args
@@ -72,7 +73,7 @@ Sub Main(args)
     	    inText = inStrm.ReadAll
     	    inStrm.Close
             ' TODO: 升级到.NET版本后不再需要剪裁起始处
-    		outStrm.Write TrimStart(regex.Replace(inText, vbCrLf))
+    	    outStrm.Write TrimStart(regex.Replace(inText, vbCrLf))
     	    outStrm.Close
         else
     	    msgbox "有一个或多个文件不是文本文件",vbexclamation,"参数错误"
