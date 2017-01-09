@@ -16,13 +16,13 @@ var __extends = (this && this.__extends) || function (self, _super) {
 ### 使用继承
 ```js
 var $类名$ = (function (_super) {
-    extends($类名$, _super);
+    __extends($类名$, _super);
     // 构造函数
     function $类名$() {
         // 调用没参数的构造函数
         return _super.apply(this, arguments) || this; 
         // 如果有参数：
-        return _super.call(this, $参数1$, $参数2$, ...) || this;
+        return _super.call(this, $参数$, ...) || this;
     }
     return $类名$;
 }($基类名$));
@@ -72,7 +72,7 @@ var $别名$ = $命名空间或类名$;
 ```
 ## 覆盖方法
 ```js
-$类名$.prototype.$方法名$ = function ($参数1$) {
-    var result = _super.prototype.$方法名$.call(this, $参数1$);
+$类名$.prototype.$方法名$ = function ($参数$) {
+    var result = _super.prototype.$方法名$.call(this, $参数$);
 };
 ```
